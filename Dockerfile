@@ -7,15 +7,15 @@ WORKDIR /app/client
 RUN npm install -g @angular/cli@19.2.1
 
 # Copy ONLY necessary files for npm install (for caching)
-COPY client/package*.json ./
-COPY client/angular.json ./
-COPY client/tsconfig*.json ./
+COPY ecommerce/client/package*.json ./
+COPY ecommerce/client/angular.json ./
+COPY ecommerce/client/tsconfig*.json ./
 
 # Install dependencies (using npm ci for consistency)
 RUN npm ci
 
 # Copy the entire source code (after dependency installation)
-COPY client/src ./src
+COPY ecommerce/client/src ./src
 
 # Build the Angular app with verbose output
 RUN ng build --verbose
@@ -26,10 +26,10 @@ FROM openjdk:23 AS javabuild
 WORKDIR /app
 
 # Copy Maven files
-COPY pom.xml .
-COPY .mvn/ .mvn/
-COPY mvnw .
-COPY src ./src
+COPY ecommerce/pom.xml .
+COPY ecommerce/.mvn/ .mvn/
+COPY ecommerce/mvnw .
+COPY ecommerce/src ./src
 
 # Copy Angular build artifacts to static resources.  Corrected path!
 COPY --from=ngbuild /app/client/dist/client-side ./src/main/resources/static
