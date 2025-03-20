@@ -1,0 +1,28 @@
+<div class="title">
+  <div class="title-a"> <img src="/assets/kwikemart.png"> </div>
+  <app-main></app-main>
+
+  <div class="title-d">
+    <h3>Item in cart</h3>
+    <h1> <code>{{ itemCount }}</code> </h1>
+  </div>
+
+  <div class="title-b">
+    @if(itemCount > 0){
+      <button type="button" (click)="checkout()">Checkout</button>
+    }
+    @else {
+      <button type="button" disabled>Checkout</button>
+    }
+    
+  </div>
+
+  <div class="title-c">
+    <button type="button" [routerLink]="['/']">Back</button>
+  </div>
+</div>
+
+<router-outlet />
+
+<!-- <button type="button" [disabled]="itemCount === 0" (click)="checkout()">Checkout</button> -->
+ <!-- use disabled or [disable]="true" -->
